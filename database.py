@@ -68,6 +68,7 @@ class Database:
 
     def decrement(self, value):
         if value in self.value_counter:
+            # A little hacky if/else, but it works.
             if self.value_counter[value] == 1:
                 del self.value_counter[value]
             else:
@@ -75,11 +76,12 @@ class Database:
 
 def main():
     db = Database()
-    # I'm putting this in a while loop which is a little risky but I like it for running a small application like this. It also lets me decorate the STDIN with the ">>" to make things more legible.
+    # I'm putting this in a while loop which is a little risky but I like it for running a small application like this. It also lets me add the ">>" to make things more legible.
     while True:
         print(">> ", end='', flush=True)
 
         line = sys.stdin.readline()
+        # This *should* prevent the while loop from breaking it's boundaries.
         if not line or line.strip() == "END":
             break
 
